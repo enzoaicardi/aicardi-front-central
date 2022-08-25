@@ -1,0 +1,67 @@
+
+.ai-field{
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: var(--input-max-width);
+
+    gap: var(--gap-regular);
+
+}
+
+    .ai-field > *{
+        padding-left: var(--radius-regular);
+    }
+
+    .ai-field label{
+        font-weight: var(--font-semibold);
+    }
+
+    .ai-field label.required{
+        padding-left: 0;
+    }
+        .ai-field label.required::before{
+            content: "*";
+            margin-right: var(--gap-small);
+            color: var(--color-main);
+        }
+
+    .ai-field .input{
+
+        height: var(--input-height);
+        border: var(--border-back);
+        border-radius: var(--radius-regular);
+        background-color: transparent;
+
+        display: flex;
+        align-items: stretch;
+        justify-content: space-between;
+
+        gap: var(--gap-small);
+        padding: 0 var(--gap-medium);
+
+    }
+
+    .ai-field .input[data-completed]{
+
+        border: none;
+        border-radius: var(--radius-regular);
+        background-color: var(--color-back);
+
+    }
+
+        .ai-field .input span{
+            flex: none;
+            align-self: center;
+            color: var(--color-main);
+        }
+
+    .ai-field .requirements{
+        color: var(--color-subcontent);
+    }
+
+    .ai-field .errors{
+        color: var(--color-error);
+    }

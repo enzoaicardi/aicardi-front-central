@@ -1,0 +1,24 @@
+
+
+.ai-button{
+    cursor: pointer;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: var(--input-height);
+    max-width: var(--input-max-width);
+    padding: 0 var(--gap-medium);
+
+    background-color: var(--color-main);
+    border-radius: var(--radius-regular);
+
+    font-weight: var(--font-semibold);
+}
+
+.ai-button.icon{
+    justify-content: space-between;
+}

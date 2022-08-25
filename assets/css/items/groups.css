@@ -1,0 +1,12 @@
+
+
+.ai-group:empty{
+    /* :empty elements need no space/tabs/returns inside the code */
+    display: none;
+}
+
+.ai-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

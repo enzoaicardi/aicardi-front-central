@@ -1,0 +1,88 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+    <script>
+
+        function apiURL(url){
+            let prefix = 'http://127.0.0.1:3334/api/'
+            return prefix + url
+        }
+
+        // LOGIN
+
+        fetch(apiURL('v1/user/login?email=enzo.aicardi@gmail.com&username=user1&password=password'),
+        {
+            method: 'POST',
+            body: {
+                email: 'enzo.aicardi@gmail.com',
+                username: 'user1',
+                password: 'password'
+            }
+        })
+        
+        .then((res)=>{
+            return res.text()
+        }).then((res)=>{
+
+            console.log(res)
+
+            fetch(apiURL('v1/user/details'),
+                {
+                    method: 'GET',
+                    // mode: 'no-cors',
+                    headers: {
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                })
+                
+                .then((res)=>{
+                    return res.text()
+                }).then((res)=>{
+                    console.log(res)
+                })
+
+        })
+
+        document.addEventListener('click', function(){
+
+            const PUBLISHABLE_KEY = 'pk_test_51LZUl7BX2t3BbthS2LvDIL7qYA7YQMC5Z0wM4QdSivZyhJ0sZEMdFfUxpyXKxkyxNKMi460uHgyBQzJ38yOuUNg400lzEmaav7'
+            const stripe = Stripe(PUBLISHABLE_KEY)
+
+            fetch(apiURL('v1/checkout/proceed?service=suite'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+            })
+            .then((result) => result.json())
+            .then(({ sessionId }) => {
+                stripe.redirectToCheckout({ sessionId })
+            })
+
+        })
+
+        // fetch(apiURL('google/login'),
+        // {
+        //     method: 'GET',
+        //     headers: {
+        //         'Access-Control-Allow-Origin': '*'
+        //     }
+        // })
+        
+        // .then((res)=>{
+        //     return res.text()
+        // }).then((res)=>{
+        //     console.log(res)
+        // })
+
+    </script>
+    
+</body>
+</html>
