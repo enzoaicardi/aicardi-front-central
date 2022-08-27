@@ -1,7 +1,7 @@
 import { ButtonElement } from "../items/buttons.js";
-import { AiElement, Element, GroupElement } from "../items/elements.js";
+import { AiElement, GroupElement } from "../items/elements.js";
 import { HeaderLogoElement } from "../items/headers.js";
-import { FieldElement, FieldsGroupElement } from "../items/inputs.js";
+import { FieldElement, FieldsGroupElement } from "../items/fields.js";
 import { TitleElement } from "../items/titles.js";
 import { Rule } from "../lib/rules.js";
 
@@ -33,6 +33,13 @@ class AuthComponent extends AiElement{
         ]);
     }
 
+    watchFields(){
+        this.watchKeys(
+            this.fieldsGroup.getFields(),
+            (items)=>{ this.buttonElement.toggleStatus('enabled', FieldElement.areValid(items)); }
+        );
+    }
+
 }
 
 class LoginComponent extends AuthComponent{
@@ -58,6 +65,8 @@ class LoginComponent extends AuthComponent{
         });
 
         this.asChild();
+        this.watchFields();
+
     }
 
 }
@@ -68,6 +77,7 @@ class RegisterComponent extends AuthComponent{
         super('Créer un compte');
 
         this.fieldsGroup.build({
+            // new FieldElement(key, {type}, {...})
             email: {
                 type: 'email',
                 icon: 'email',
@@ -98,7 +108,15 @@ class RegisterComponent extends AuthComponent{
             }
         });
 
+        const pass = this.fieldsGroup.field('password');
+        const repeat = this.fieldsGroup.field('repeat');
+        
+        FieldElement.sameValue([pass, repeat], 'NO_MATCH_REPEAT_PASS');
+        // requirements
+
         this.asChild();
+        this.watchFields();
+
     }
 
 }

@@ -11,7 +11,7 @@ export class Element{
     constructor(tagName, attributes){
 
         this.element = document.createElement(tagName);
-        this.acceptedStatus = ['enabled', 'completed', 'careful', 'loading', 'failed', 'success'];
+        this.acceptedStatus = ['enabled', 'completed', 'required', 'careful', 'loading', 'failed', 'success'];
 
         for(let key in attributes){
             this.element.setAttribute(key, attributes[key]);
@@ -24,19 +24,23 @@ export class Element{
     }
 
     add(element){
-        this.element.appendChild(element);
+        this.element.appendChild(element); return this;
     }
 
     remove(element){
-        this.element.removeChild(element);
+        this.element.removeChild(element); return this;
     }
 
     clear(){
-        this.html('');
+        this.html(''); return this;
     }
 
     html(htmlStr){
-        this.element.innerHTML = htmlStr;
+        this.element.innerHTML = htmlStr; return this;
+    }
+
+    content(content){
+        this.element.textContent = content; return this;
     }
 
     asChild(parent){
@@ -65,14 +69,23 @@ export class Element{
 
         explore(array, this.element);
 
+        return this;
+
     }
+
+    // status
 
     isValidStatus(status){
         return this.acceptedStatus.indexOf(status) + 1;
     }
 
-    status(){
-        return this.element.dataset;
+    status(name){
+        return !this.element.dataset ? false : name ? this.element.dataset[name] : this.element.dataset;
+    }
+
+    toggleStatus(name, condition){
+        if(condition) this.addStatus(name);
+        else this.removeStatus(name);
     }
 
     addStatus(name){
@@ -81,6 +94,37 @@ export class Element{
 
     removeStatus(name){
         if(this.isValidStatus(name)) this.element.removeAttribute('data-' + name)
+    }
+
+    // events
+
+    listen(eventType, fn, options){
+        this.element.addEventListener(eventType, fn, options || {passive:true});
+    }
+
+    watch(items, eventType, fn, options){
+
+        const callback = (event) => { fn(items, this, event); }
+        const instances = !Array.isArray(items) ? [items] : items;
+
+        instances.forEach(item => {
+            item.listen(eventType, callback, options);
+        });
+ 
+    }
+
+    watchKeys(items, fn, options){
+        this.watch(items, 'keyup', fn, options)
+    }
+
+    // conditions
+
+    isRequired(){
+        return this.status('required');
+    }
+
+    isCompleted(){
+        return this.status('completed') && !this.status('failed');
     }
 
 }

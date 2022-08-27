@@ -13,10 +13,16 @@
     max-width: var(--input-max-width);
     padding: 0 var(--gap-medium);
 
-    background-color: var(--color-main);
+    background-color: var(--color-back);
     border-radius: var(--radius-regular);
 
     font-weight: var(--font-semibold);
+    color: var(--color-window);
+}
+
+.ai-button[data-enabled]{
+    background-color: var(--color-main);
+    color: var(--color-content);
 }
 
 .ai-button.icon{

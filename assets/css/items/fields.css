@@ -19,10 +19,10 @@
         font-weight: var(--font-semibold);
     }
 
-    .ai-field label.required{
+    .ai-field[data-required] label{
         padding-left: 0;
     }
-        .ai-field label.required::before{
+        .ai-field[data-required] label::before{
             content: "*";
             margin-right: var(--gap-small);
             color: var(--color-main);
@@ -44,12 +44,16 @@
 
     }
 
-    .ai-field .input[data-completed]{
+    .ai-field[data-completed] .input{
 
-        border: none;
+        border: var(--border-none);
         border-radius: var(--radius-regular);
         background-color: var(--color-back);
 
+    }
+
+    .ai-field[data-failed] .input{
+        border: var(--border-error);
     }
 
         .ai-field .input span{
@@ -59,9 +63,10 @@
         }
 
     .ai-field .requirements{
+        font-size: var(--font-size-small);
         color: var(--color-subcontent);
     }
 
-    .ai-field .errors{
+    .ai-field .pops{
         color: var(--color-error);
     }

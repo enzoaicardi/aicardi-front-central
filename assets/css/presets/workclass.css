@@ -20,7 +20,10 @@ body{
     --color-error:  #FF4C4D;
     --color-link: inherit;
 
-    --border-back: 2px solid var(--color-back);
+    --border-size: 2px;
+    --border-none: var(--border-size) solid transparent;
+    --border-back: var(--border-size) solid var(--color-back);
+    --border-error: var(--border-size) solid var(--color-error);
 
     --font-default:  'Inter', Arial, Helvetica, sans-serif;
     --font-mono:     monospace;
@@ -49,7 +52,7 @@ body{
     --gap-large: 25px;
     --gap-mega: 50px;
 
-    --line-height: 1.4;
+    --line-height: 1.2;
 
     --input-height: 50px;
     --input-max-width: 380px;
@@ -69,6 +72,10 @@ body.dark-mode{
 *{
     /* this can affect materials-icons */
     line-height: inherit;
+}
+
+p{
+    line-height: var(--line-height);
 }
 
 .material-icons,

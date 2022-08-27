@@ -1,19 +1,35 @@
 
-// basic paths
 
-const centralUrl = typeof aiLocalMode === 'undefined' ? 'https://central.aicardi.pro/' : 'http://127.0.0.1:3334/';
-const assetsUrl = centralUrl + 'assets/';
-const mediasUrl = assetsUrl + 'medias/';
-const imgUrl = mediasUrl + 'img/';
 
-// assets vars
+export class Folders{
 
-export const aiLogo = {
-    transparency: getLogo('aicardi.pro-transparency.svg')
+    static index(path){
+        const URL = typeof aiLocalMode === 'undefined' ? 'https://central.aicardi.pro/' : 'http://127.0.0.1:3334/';
+        return URL + (path || '');
+    }
+
+    static assets(path){
+        return this.index('assets/' + (path || ''));
+    }
+
+    static medias(path){
+        return this.assets('medias/' + (path || ''));
+    }
+
+    static images(path){
+        return this.medias('img/' + (path || ''));
+    }
+
 }
 
-// assets functions
+const aiLogo = {
+    transparency: 'aicardi.pro-transparency.svg'
+}
 
-export function getLogo(filename){
-    return imgUrl + 'logos/' + filename;
+export class Media{
+
+    static logo(name){
+        return Folders.images('logos/' + (aiLogo[name] || name));
+    }
+    
 }

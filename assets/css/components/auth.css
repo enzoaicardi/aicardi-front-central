@@ -21,7 +21,7 @@
 
 }
 
-    .ai-auth .ai-fields{
+    .ai-auth .fields{
         gap: var(--gap-large);
         padding: 0 var(--gap-large);
     }
