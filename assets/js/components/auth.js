@@ -1,16 +1,10 @@
 import { ButtonElement } from "../items/buttons.js";
 import { AiElement, GroupElement } from "../items/elements.js";
 import { HeaderLogoElement } from "../items/headers.js";
-import { FieldElement, FieldsGroupElement } from "../items/fields.js";
+import { FieldElement, FieldSet, FieldsGroupElement } from "../items/fields.js";
 import { TitleElement } from "../items/titles.js";
 import { Rule } from "../lib/rules.js";
 
-export function setUpAuth(){
-
-    let login = new LoginComponent;
-    let register = new RegisterComponent;
-
-}
 
 class AuthComponent extends AiElement{
 
@@ -21,70 +15,53 @@ class AuthComponent extends AiElement{
         this.titleElement = new TitleElement(title);
         this.fieldsGroup = new FieldsGroupElement();
         this.footerGroup = new GroupElement('footer');
-        this.buttonElement = new ButtonElement(title, {icon: 'key'});
+        this.confirmButton = new ButtonElement(title, {icon: 'key'});
 
         this.describe([
             this.headerElement,
             this.titleElement,
             this.fieldsGroup,
             this.footerGroup, [
-                this.buttonElement
+                this.confirmButton
             ]
         ]);
+
+        this.asChild();
+        this.listen('input', ()=>{ this.confirmButton.toggleStatus(FieldElement.areValid(this.fieldsGroup.getFields()), 'enabled');});
+        
     }
 
-    watchFields(){
-        this.watchKeys(
-            this.fieldsGroup.getFields(),
-            (items)=>{ this.buttonElement.toggleStatus('enabled', FieldElement.areValid(items)); }
-        );
+    matchPass(){
+        const pass = this.fieldsGroup.field('password');
+        const repeat = this.fieldsGroup.field('repeat');
+        
+        pass.requirements.new('password');
+        FieldElement.sameValue([pass, repeat], 'NO_MATCH_REPEAT_PASS');
     }
 
 }
 
-class LoginComponent extends AuthComponent{
+export class LoginComponent extends AuthComponent{
 
     constructor(){
         super('Connexion');
 
         this.fieldsGroup.build({
-            email: {
-                type: 'email',
-                icon: 'email',
-                label: 'Adresse Email',
-                rule: Rule.email,
-                required: true
-            },
-            password: {
-                type: 'password',
-                icon: 'lock',
-                label: 'Mot de passe',
-                rule: Rule.password,
-                required: true
-            }
+            email: FieldSet.email,
+            password: FieldSet.password
         });
-
-        this.asChild();
-        this.watchFields();
-
     }
 
 }
 
-class RegisterComponent extends AuthComponent{
+export class RegisterComponent extends AuthComponent{
 
     constructor(){
         super('Créer un compte');
 
         this.fieldsGroup.build({
             // new FieldElement(key, {type}, {...})
-            email: {
-                type: 'email',
-                icon: 'email',
-                label: 'Adresse Email',
-                rule: Rule.email,
-                required: true
-            },
+            email: FieldSet.email,
             username: {
                 type: 'text',
                 icon: 'person',
@@ -92,31 +69,48 @@ class RegisterComponent extends AuthComponent{
                 rule: Rule.username,
                 required: true
             },
-            password: {
-                type: 'password',
-                icon: 'lock',
-                label: 'Mot de passe',
-                rule: Rule.password,
-                required: true
-            },
-            repeat: {
-                type: 'password',
-                icon: 'lock',
-                label: 'Répéter mot de passe',
-                rule: Rule.password,
-                required: true
-            }
+            password: FieldSet.password,
+            repeat: FieldSet.repeat
         });
 
-        const pass = this.fieldsGroup.field('password');
-        const repeat = this.fieldsGroup.field('repeat');
-        
-        FieldElement.sameValue([pass, repeat], 'NO_MATCH_REPEAT_PASS');
-        // requirements
+        this.matchPass();
 
-        this.asChild();
-        this.watchFields();
+    }
 
+}
+
+export class ForgotPassComponent extends AuthComponent{
+
+    constructor(){
+        super('Récupération')
+
+        this.fieldsGroup.build({
+            // new FieldElement(key, {type}, {...})
+            email: {
+                type: 'email',
+                icon: 'email',
+                label: 'Adresse de récupération',
+                rule: Rule.email,
+                required: true
+            }
+
+        });
+
+    }
+
+}
+
+export class ChangePassComponent extends AuthComponent{
+
+    constructor(){
+        super('Changement')
+
+        this.fieldsGroup.build({
+            password: FieldSet.password,
+            repeat: FieldSet.repeat
+        });
+
+        this.matchPass();
     }
 
 }

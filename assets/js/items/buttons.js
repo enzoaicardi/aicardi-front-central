@@ -7,7 +7,7 @@ export class ButtonElement extends AiElement{
     constructor(name, options){
         options = options || {};
 
-        super('button', {}, 'button');
+        super('button', {tag: 'button'});
 
         this.textElement = new Element('p');
         this.textElement.asChild(this.element);

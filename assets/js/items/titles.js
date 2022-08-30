@@ -1,11 +1,19 @@
-import { AiElement } from "./elements.js";
+import { AiElement, Element } from "./elements.js";
+import { SvgElement } from "./svg.js";
 
 
 export class TitleElement extends AiElement{
 
-    constructor(title){
+    constructor(title, src){
         super('title')
-        this.element.textContent = title;
+
+        this.imgElement = new SvgElement(src),
+        this.titleElement = new Element('h3')
+        
+        this.describe([
+            this.imgElement,
+            this.titleElement.content(title)
+        ])
     }
 
 }

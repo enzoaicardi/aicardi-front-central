@@ -3,7 +3,7 @@ import { IconElement } from "./icons.js";
 
 
 const popMessages = {
-    NO_MATCH_REPEAT_PASS: 'Les mots de passe ne correspondent pas'
+    NO_MATCH_REPEAT_PASS: 'Les mots de passe doivent correspondre'
 };
 
 export class PopsGroupElement extends GroupElement{
@@ -23,7 +23,7 @@ export class PopsGroupElement extends GroupElement{
         if(this.pops[code]) this.pops[code].get().remove()
     }
 
-    toggle(code, icon, condition){
+    toggle(condition, code, icon){
         if(condition) this.new(code, icon);
         else this.delete(code);
     }
@@ -58,19 +58,23 @@ export class PopElement extends AiElement{
     }
 
     error(){
-        this.element.setAttribute('data-type', 'error')
+        this.element.setAttribute('data-type', 'error');
+        return this;
     }
 
     warn(){
-        this.element.setAttribute('data-type', 'warn')
+        this.element.setAttribute('data-type', 'warn');
+        return this;
     }
 
     success(){
-        this.element.setAttribute('data-type', 'success')
+        this.element.setAttribute('data-type', 'success');
+        return this;
     }
 
     info(){
-        this.element.setAttribute('data-type', 'info')
+        this.element.setAttribute('data-type', 'info');
+        return this;
     }
 
 }

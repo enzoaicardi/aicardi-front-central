@@ -1,3 +1,6 @@
-import { setUpAuth } from "./components/auth.js";
+import { LoginComponent, RegisterComponent } from "./components/auth.js";
+import { ListComponent } from "./components/list.js";
 
-setUpAuth();
+// new LoginComponent()
+// new RegisterComponent()
+new ListComponent('Prestataires')

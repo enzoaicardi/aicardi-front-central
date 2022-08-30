@@ -1,21 +1,19 @@
+import { createElement } from "../workspace.js";
 
 
 export class Element{
 
     /**
      * Create a DOM Element
-     * @param {string} tagName 
+     * @param {string} tag 
      * @param {object} [attributes] 
      */
 
-    constructor(tagName, attributes){
+    constructor(tag, attributes){
 
-        this.element = document.createElement(tagName);
+        this.element = createElement(tag, attributes);
         this.acceptedStatus = ['enabled', 'completed', 'required', 'careful', 'loading', 'failed', 'success'];
-
-        for(let key in attributes){
-            this.element.setAttribute(key, attributes[key]);
-        }
+        this.statusList = {};
 
     }
 
@@ -35,8 +33,10 @@ export class Element{
         this.html(''); return this;
     }
 
-    html(htmlStr){
-        this.element.innerHTML = htmlStr; return this;
+    html(content, outer){
+        if(outer) this.element.outerHTML = content;
+        else this.element.innerHTML = content;
+        return this;
     }
 
     content(content){
@@ -75,46 +75,47 @@ export class Element{
 
     // status
 
-    isValidStatus(status){
-        return this.acceptedStatus.indexOf(status) + 1;
+    isValidStatus(name){
+        return this.acceptedStatus.indexOf(name) + 1;
     }
 
     status(name){
-        return !this.element.dataset ? false : name ? this.element.dataset[name] : this.element.dataset;
+        return this.statusList[name] || false;
     }
 
-    toggleStatus(name, condition){
+    toggleStatus(condition, name){
         if(condition) this.addStatus(name);
         else this.removeStatus(name);
     }
 
     addStatus(name){
-        if(this.isValidStatus(name)) this.element.setAttribute('data-' + name, true)
+        if(this.isValidStatus(name)) { 
+            this.element.setAttribute('data-' + name, true);
+            this.statusList[name] = true;
+        }
+        return this;
     }
 
     removeStatus(name){
-        if(this.isValidStatus(name)) this.element.removeAttribute('data-' + name)
+        if(this.isValidStatus(name)) { 
+            this.element.removeAttribute('data-' + name);
+            this.statusList[name] = false;
+        }
+        return this;
     }
 
     // events
 
-    listen(eventType, fn, options){
-        this.element.addEventListener(eventType, fn, options || {passive:true});
+    listen(type, fn, options){
+        this.element.addEventListener(type, fn, options || {passive:true});
     }
 
-    watch(items, eventType, fn, options){
-
-        const callback = (event) => { fn(items, this, event); }
+    watch(items, type, fn, options){
+        // always prefer listen if you can observe only one parentElement
         const instances = !Array.isArray(items) ? [items] : items;
-
         instances.forEach(item => {
-            item.listen(eventType, callback, options);
+            item.listen(type, event => {fn(this, event)}, options);
         });
- 
-    }
-
-    watchKeys(items, fn, options){
-        this.watch(items, 'keyup', fn, options)
     }
 
     // conditions
@@ -133,20 +134,18 @@ export class AiElement extends Element{
 
     /**
      * Create a Ai Element
-     * @param {string} data 
+     * @param {string|Array<string>} names 
      * @param {object} [attributes] 
-     * @param {string} [tagName] 
      */
 
-    constructor(data, attributes, tagName){
+    constructor(names, attributes){
 
-        let name;
         let prefix = 'ai-';
 
-        if(Array.isArray(data)) name = data.map((item)=>{ return prefix+item }).join(' ');
-        else name = prefix + data;
+        if(Array.isArray(names)) names = names.map((value)=>{ return prefix+value });
+        else names = prefix + names;
 
-        super(tagName || 'div', {class: name, ...attributes})
+        super('div', {class: names, ...attributes})
 
     }
 
@@ -161,7 +160,8 @@ export class GroupElement extends AiElement{
      */
 
     constructor(name, attributes){
-        super('group ' + name, attributes)
+        super('group', attributes)
+        this.element.classList.add(name);
     }
 
 }

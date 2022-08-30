@@ -130,11 +130,11 @@ textarea {
 
 /* no-scroll-bar class */
 
-.ns::-webkit-scrollbar {
+::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
 
-.ns {
+* {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }

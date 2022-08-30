@@ -4,11 +4,38 @@ import { InputElement } from "./inputs.js";
 import { PopsGroupElement } from "./pops.js";
 import { RequirementsGroupElement } from "./requirements.js";
 
+export class FieldSet{
+
+    static password = {
+        type: 'password',
+        icon: 'lock',
+        label: 'Mot de passe',
+        rule: Rule.password,
+        required: true
+    }
+
+    static repeat = {
+        type: 'password',
+        icon: 'lock',
+        label: 'Répéter mot de passe',
+        rule: Rule.password,
+        required: true
+    }
+
+    static email = {
+        type: 'email',
+        icon: 'email',
+        label: 'Adresse Email',
+        rule: Rule.email,
+        required: true
+    }
+
+}
 
 export class FieldsGroupElement extends GroupElement{
 
     constructor(){
-        super('fields')
+        super('fields');
         this.fields = {};
     }
 
@@ -66,7 +93,7 @@ export class FieldElement extends AiElement{
         this.rule = options.rule || Rule.std;
 
         // event listener
-        this.inputElement.listen('keyup', ()=>{
+        this.inputElement.listen('input', ()=>{
 
             let input = this.inputElement.input();
 
@@ -85,30 +112,20 @@ export class FieldElement extends AiElement{
     }
 
     static sameValue(items, code){
+        items[0].watch(items, 'input', compare);
 
-        items[0].watchKeys(items, compare);
+        function compare(){
+            const condition = items.some((item) => { return item.input().value !== items[0].input().value; });
 
-        function compare(items){
-
-            const condition = items.some((item)=>{
-                return item.input().value !== items[0].input().value
-            });
-            
-            items.forEach(item => {
-                item.toggleStatus('failed', condition);
-            }); 
-
-            items[items.length-1].pops.toggle(code, null, condition);
-
+            items.forEach(item => { item.toggleStatus(condition, 'failed'); }); 
+            items[items.length-1].pops.toggle(condition, code);
         }
     }
 
     static areValid(items){
-
         return items.every((item)=>{
             return !item.isRequired() || item.isCompleted()
         });
-
     }
 
 }

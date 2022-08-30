@@ -4,7 +4,7 @@
 *   don't break with DOM delete / create element
 */
 
-function globalListener(
+export function globalListener(
     type,
     selector,
     callback,
@@ -23,26 +23,27 @@ function globalListener(
   }
 
 /* Faster querySelector */
-function qs(selector, parent) {
+export function qs(selector, parent) {
     var parent = parent || document;
     return parent.querySelector(selector);
 }
 
 /* Faster querySelectorAll */
-function qsa(selector, parent) {
+export function qsa(selector, parent) {
     var parent = parent || document;
     return parent.querySelectorAll(selector);
 }
   
 /* Faster CreateElement */
-function createElement(type, options) {
+export function createElement(type, options) {
 
     var options = options || {};
-    var element = document.createElement(type);
+    var element = document.createElement(options.tag || type);
 
     Object.entries(options).forEach(([key, value]) => {
       if (key === "class") {
-        element.classList.add(value);
+        if(Array.isArray(value)) value.forEach((name) => {element.classList.add(name);});
+        else element.classList.add(value);
         return;
       }
   
@@ -66,7 +67,7 @@ function createElement(type, options) {
 }
 
 /* Get a random number between 2 values */
-function randomNumberBetween(min, max) {
+export function randomNumberBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -75,23 +76,23 @@ function randomNumberBetween(min, max) {
 *   get first, last or random elements
 */
 
-function first(array, n) {
+export function first(array, n) {
     var n = n || 1;
     if (n === 1) {return array[0];}
     return array.filter(function(_, index){ return index < n; });
 }
   
-function last(array, n) {
+export function last(array, n) {
     var n = n || 1;
     if (n === 1) {return array[array.length - 1];}
     return array.filter(function(_, index){ return array.length - index <= n; });
 }
   
-function sample(array) {
+export function sample(array) {
     return array[randomNumberBetween(0, array.length - 1)];
 }
   
-function pluck(array, key) {
+export function pluck(array, key) {
     return array.map(function(element){ return element[key]; })
 }
 
@@ -115,19 +116,19 @@ var CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
     currency: "EUR",
     style: "currency"
 });
-function formatCurrency(number) {
+export function formatCurrency(number) {
     return CURRENCY_FORMATTER.format(number);
 }
   
 var NUMBER_FORMATTER = new Intl.NumberFormat(undefined);
-function formatNumber(number) {
+export function formatNumber(number) {
     return NUMBER_FORMATTER.format(number);
 }
   
 var COMPACT_NUMBER_FORMATTER = new Intl.NumberFormat(undefined, {
     notation: "compact"
 });
-function formatCompactNumber(number) {
+export function formatCompactNumber(number) {
     return COMPACT_NUMBER_FORMATTER.format(number);
 }
   

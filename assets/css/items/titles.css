@@ -1,9 +1,18 @@
 
 .ai-title{
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-medium);
+
     width: max-content;
 
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-mega);
     font-weight: var(--font-bold);
 
 }
+
+    .ai-title svg{
+        height: 40px;
+    }

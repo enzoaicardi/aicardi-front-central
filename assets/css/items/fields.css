@@ -12,7 +12,7 @@
 }
 
     .ai-field > *{
-        padding-left: var(--radius-regular);
+        padding: 0 var(--radius-regular);
     }
 
     .ai-field label{
@@ -48,6 +48,7 @@
 
         border: var(--border-none);
         border-radius: var(--radius-regular);
+        color: var(--color-incontent);
         background-color: var(--color-back);
 
     }
@@ -68,5 +69,9 @@
     }
 
     .ai-field .pops{
+        font-size: var(--font-size-small);
         color: var(--color-error);
     }
+        .ai-field .ai-pop .code{
+            display: none;
+        }

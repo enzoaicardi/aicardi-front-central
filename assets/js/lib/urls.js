@@ -23,7 +23,8 @@ export class Folders{
 }
 
 const aiLogo = {
-    transparency: 'aicardi.pro-transparency.svg'
+    transparency: 'aicardi.pro-transparency.svg',
+    whiteDot: 'aicardi.pro-white-dot.svg'
 }
 
 export class Media{

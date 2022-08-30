@@ -22,7 +22,12 @@
 
 .ai-button[data-enabled]{
     background-color: var(--color-main);
-    color: var(--color-content);
+    color: var(--color-incontent);
+}
+
+.ai-button[data-enabled][data-careful]{
+    background-color: var(--color-back);
+    color: var(--color-main);
 }
 
 .ai-button.icon{
