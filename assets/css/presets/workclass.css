@@ -27,9 +27,11 @@ body{
     --border-window: var(--border-size) solid var(--color-window);
     --border-back: var(--border-size) solid var(--color-back);
     --border-content: var(--border-size) solid var(--color-content);
+    --border-incontent: var(--border-size) solid var(--color-incontent);
     --border-subcontent: var(--border-size) solid var(--color-subcontent);
-
+    
     --border-main: var(--border-size) solid var(--color-main);
+    --border-ok: var(--border-size) solid var(--color-ok);
     --border-error: var(--border-size) solid var(--color-error);
 
     --font-default:  'Inter', Arial, Helvetica, sans-serif;

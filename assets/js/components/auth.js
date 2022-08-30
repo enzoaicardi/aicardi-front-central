@@ -27,7 +27,7 @@ class AuthComponent extends AiElement{
         ]);
 
         this.asChild();
-        this.listen('input', ()=>{ this.confirmButton.toggleStatus(FieldElement.areValid(this.fieldsGroup.getFields()), 'enabled');});
+        this.listen('input', ()=>{ this.confirmButton.toggleStatus(FieldElement.areValid(this.fieldsGroup.childs), 'enabled');});
         
     }
 
@@ -60,7 +60,6 @@ export class RegisterComponent extends AuthComponent{
         super('Créer un compte');
 
         this.fieldsGroup.build({
-            // new FieldElement(key, {type}, {...})
             email: FieldSet.email,
             username: {
                 type: 'text',
@@ -85,7 +84,6 @@ export class ForgotPassComponent extends AuthComponent{
         super('Récupération')
 
         this.fieldsGroup.build({
-            // new FieldElement(key, {type}, {...})
             email: {
                 type: 'email',
                 icon: 'email',

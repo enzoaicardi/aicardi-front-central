@@ -42,16 +42,12 @@ export class FieldsGroupElement extends GroupElement{
     build(obj){
         for(let key in obj){
             this.fields[key] = new FieldElement(key, obj[key].type || null, obj[key]);
-            this.add(this.fields[key].get());
+            this.add(this.fields[key]);
         }
     }
 
     field(name){
         return this.fields[name];
-    }
-
-    getFields(){
-        return Object.values(this.fields);
     }
 
 }

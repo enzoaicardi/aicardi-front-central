@@ -1,6 +1,7 @@
 
 
 .ai-entity{
+    user-select: none;
     cursor: pointer;
 
     display: flex;
@@ -21,7 +22,11 @@
     border: var(--border-main);
 }
 
-    .ai-entity-title{
+.ai-entity[data-selected="readonly"]{
+    border: var(--border-ok);
+}
+
+    .ai-entity-label{
         display: flex;
         align-items: center;
         gap: var(--gap-regular);
@@ -33,28 +38,30 @@
         border-radius: var(--radius-regular);
     }
 
-    .dark-mode .ai-entity-title{
+    .dark-mode .ai-entity-label{
         background-color: var(--color-back);
     }
 
-        .ai-entity-title span{
+        .ai-entity-label span{
             font-size: var(--font-size-mega);
             color: var(--color-incontent);
         }
 
-        .dark-mode .ai-entity-title span{
+        .dark-mode .ai-entity-label span{
             color: var(--color-main);
         }
 
-        .ai-entity-title h3{
+        .ai-entity-label h3{
             color: var(--color-incontent);
             font-size: var(--font-size-medium);
             font-weight: var(--font-semibold);
             line-height: var(--line-height);
+            text-transform: capitalize;
         }
 
-        .ai-entity-title p{
+        .ai-entity-label p{
             color: var(--color-subcontent);
+            text-transform: capitalize;
         }
 
     .ai-entity .commands{
@@ -65,6 +72,10 @@
 
     .ai-entity[data-selected] .commands{
         display: flex;
+    }
+
+    .ai-entity[data-selected="readonly"] .commands{
+        display: none;
     }
 
     .ai-entity .address{

@@ -53,11 +53,11 @@ export class InputElement extends Element{
         this.input().value = '';
     }
 
-    set(value){
+    value(value){
         this.input().value = value.toString();
     }
 
-    add(value){
+    addValue(value){
         this.input().value += value.toString();
     }
 

@@ -12,8 +12,9 @@ export class Element{
     constructor(tag, attributes){
 
         this.element = createElement(tag, attributes);
-        this.acceptedStatus = ['enabled', 'completed', 'required', 'careful', 'loading', 'failed', 'success'];
+        this.acceptedStatus = ['enabled', 'completed', 'selected', 'required', 'careful', 'loading', 'failed', 'success'];
         this.statusList = {};
+        this.childs = [];
 
     }
 
@@ -22,11 +23,14 @@ export class Element{
     }
 
     add(element){
-        this.element.appendChild(element); return this;
+        this.element.appendChild(element.get());
+        this.childs.push(element); return this;
     }
 
     remove(element){
-        this.element.removeChild(element); return this;
+        this.element.removeChild(element.get());
+        let index = this.childs.indexOf(element);
+        if(index+1) this.childs.splice(index, 1); return this;
     }
 
     clear(){
@@ -49,28 +53,32 @@ export class Element{
 
     describe(array){
 
-        function getElement(item){
-            if(item instanceof HTMLElement) return item;
-            else return item.get();
-        }
-
+        const that = this;
         function explore(array, parent){
 
             for(let i=0; i<array.length; i++){
 
                 let item = array[i];
                 if(!item) continue;
-                if(Array.isArray(item) && i>0) explore(item, getElement(array[i-1]));
-                else parent.appendChild(getElement(item));
+                if(Array.isArray(item) && i>0) explore(item, array[i-1]);
+                else (parent || that).add(item);
 
             }
 
         }
-
-        explore(array, this.element);
-
+        explore(array);
         return this;
 
+    }
+
+    // childs methods
+
+    some(fn){
+        return this.childs.some(fn);
+    }
+
+    every(fn){
+        return this.childs.every(fn);
     }
 
     // status
@@ -83,15 +91,16 @@ export class Element{
         return this.statusList[name] || false;
     }
 
-    toggleStatus(condition, name){
-        if(condition) this.addStatus(name);
+    toggleStatus(condition, name, value){
+        if(condition) this.addStatus(name, value);
         else this.removeStatus(name);
     }
 
-    addStatus(name){
+    addStatus(name, value){
+        value = value || true;
         if(this.isValidStatus(name)) { 
-            this.element.setAttribute('data-' + name, true);
-            this.statusList[name] = true;
+            this.element.setAttribute('data-' + name, value);
+            this.statusList[name] = value;
         }
         return this;
     }
@@ -114,7 +123,7 @@ export class Element{
         // always prefer listen if you can observe only one parentElement
         const instances = !Array.isArray(items) ? [items] : items;
         instances.forEach(item => {
-            item.listen(type, event => {fn(this, event)}, options);
+            item.listen(type, event => {fn(item, event)}, options);
         });
     }
 

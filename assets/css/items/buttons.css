@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: var(--gap-small);
 
     width: 100%;
     height: var(--input-height);
@@ -20,6 +21,10 @@
     color: var(--color-window);
 }
 
+.ai-button.icon{
+    justify-content: space-between;
+}
+
 .ai-button[data-enabled]{
     background-color: var(--color-main);
     color: var(--color-incontent);
@@ -30,6 +35,35 @@
     color: var(--color-main);
 }
 
-.ai-button.icon{
-    justify-content: space-between;
+.ai-button[data-loading]{
+    
+    background-image: linear-gradient(
+        -45deg,
+        var(--color-warn) 0% 10%,
+        var(--color-back) 10% 20%,
+        var(--color-warn) 20% 30%,
+        var(--color-back) 30% 40%,
+        var(--color-warn) 40% 50%,
+        var(--color-back) 50% 60%,
+        var(--color-warn) 60% 70%,
+        var(--color-back) 70% 80%,
+        var(--color-warn) 80% 90%,
+        var(--color-back) 90% 100%
+    );
+
+    --colora: red;
+    color: var(--colora);
+
+    animation: load-background 1000ms linear 0ms infinite forwards;
+
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 100%;
+
+}
+
+@keyframes load-background {
+    0%{
+        --colora: green;
+    }
 }
