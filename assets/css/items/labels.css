@@ -1,0 +1,21 @@
+
+.ai-label{
+    font-size: var(--font-size-regular);
+    font-weight: var(--font-medium);
+}
+
+[data-required] .ai-label::before{
+    content: "*";
+    margin-right: var(--gap-small);
+    color: var(--color-main);
+}
+
+[data-careful] .ai-label{
+    color: var(--color-warn);
+}
+
+[data-careful] .ai-label::after{
+    content: " !";
+    margin-right: var(--gap-small);
+    color: var(--color-warn);
+}

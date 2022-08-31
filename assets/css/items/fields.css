@@ -15,18 +15,9 @@
         padding: 0 var(--radius-regular);
     }
 
-    .ai-field label{
-        font-weight: var(--font-semibold);
-    }
-
-    .ai-field[data-required] label{
+    .ai-field[data-required] .ai-label{
         padding-left: 0;
     }
-        .ai-field[data-required] label::before{
-            content: "*";
-            margin-right: var(--gap-small);
-            color: var(--color-main);
-        }
 
     .ai-field .input{
 
@@ -56,6 +47,14 @@
     .ai-field[data-failed] .input{
         border: var(--border-error);
     }
+
+    .ai-field[data-careful] .input{
+        border: var(--border-warn);
+    }
+
+        .ai-field .input input{
+            flex: 1 1 auto;
+        }
 
         .ai-field .input span{
             flex: none;

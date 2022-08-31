@@ -17,8 +17,8 @@ body{
     --color-main: hsl(var(--hue), 100%, var(--bright));
     --color-secondary: #ffd9b3;
 
-    --color-ok:  #4CFF6A;
-    --color-warn: #FFA64C;
+    --color-ok:  #58ce6c;
+    --color-warn: #f38e5f;
     --color-error:  #FF4C4D;
     --color-link: inherit;
 
@@ -32,6 +32,7 @@ body{
     
     --border-main: var(--border-size) solid var(--color-main);
     --border-ok: var(--border-size) solid var(--color-ok);
+    --border-warn: var(--border-size) solid var(--color-warn);
     --border-error: var(--border-size) solid var(--color-error);
 
     --font-default:  'Inter', Arial, Helvetica, sans-serif;
@@ -51,6 +52,7 @@ body{
     --font-size-medium: 2rem;
     --font-size-large: 2.6rem;
     --font-size-mega: 3.6rem;
+    --font-size-icon: 2.4rem;
 
     --radius-small: 5px;
     --radius-regular: 10px;
@@ -65,7 +67,8 @@ body{
     --line-height: 1.2;
 
     --input-height: 50px;
-    --input-max-width: 380px;
+    --input-max-width: 340px;
+    --data-max-width: 510px;
 
     font-family: var(--font-default);
     color: var(--color-content);

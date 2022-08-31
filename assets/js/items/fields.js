@@ -1,6 +1,6 @@
 import { Rule } from "../lib/rules.js";
-import { AiElement, Element, GroupElement } from "./elements.js";
-import { InputElement } from "./inputs.js";
+import { AiElement, GroupElement } from "./elements.js";
+import { InputElement, LabelElement } from "./inputs.js";
 import { PopsGroupElement } from "./pops.js";
 import { RequirementsGroupElement } from "./requirements.js";
 
@@ -10,24 +10,32 @@ export class FieldSet{
         type: 'password',
         icon: 'lock',
         label: 'Mot de passe',
-        rule: Rule.password,
-        required: true
+        rule: Rule.password
     }
 
     static repeat = {
         type: 'password',
         icon: 'lock',
         label: 'Répéter mot de passe',
-        rule: Rule.password,
-        required: true
+        rule: Rule.password
     }
 
     static email = {
         type: 'email',
         icon: 'email',
         label: 'Adresse Email',
-        rule: Rule.email,
-        required: true
+        rule: Rule.email
+    }
+
+    static tel = {
+        type: 'tel',
+        icon: 'phone',
+        label: 'Téléphone',
+        rule: Rule.phone
+    }
+
+    static required(name){
+        return {...FieldSet[name], required: true}
     }
 
 }
@@ -65,7 +73,7 @@ export class FieldElement extends AiElement{
         
         if(options.label) {
 
-            this.labelElement = new Element('label', {for: name})
+            this.labelElement = new LabelElement(name)
             this.labelElement.get().textContent = options.label;
 
             let input = this.input();
@@ -107,11 +115,24 @@ export class FieldElement extends AiElement{
         return this.inputElement.input();
     }
 
+    clear(){
+        this.input().value = '';
+    }
+
+    value(value){
+        if(value) this.input().value = value.toString();
+        return this.input().value;
+    }
+
+    addValue(value){
+        this.input().value += value.toString();
+    }
+
     static sameValue(items, code){
         items[0].watch(items, 'input', compare);
 
         function compare(){
-            const condition = items.some((item) => { return item.input().value !== items[0].input().value; });
+            const condition = items.some((item) => { return item.value() !== items[0].value(); });
 
             items.forEach(item => { item.toggleStatus(condition, 'failed'); }); 
             items[items.length-1].pops.toggle(condition, code);

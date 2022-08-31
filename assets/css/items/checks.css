@@ -1,0 +1,44 @@
+
+
+.ai-check{
+    cursor: pointer;
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap-medium);
+}
+
+    .ai-check .box{
+        flex: none;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: var(--border-back);
+        border-radius: var(--radius-small);
+
+        width: var(--font-size-icon);
+        height: var(--font-size-icon);
+    }
+
+    .ai-check .box::before{
+        content: '';
+
+        width: 60%;
+        height: 60%;
+
+        border-radius: 2px;
+        background-color: var(--color-main);
+    }
+
+.ai-check.full{
+    padding: var(--gap-regular) 0;
+}
+
+.ai-check.full::after{
+    content: '';
+    flex: 1 1 auto;
+    border-bottom: var(--border-back);
+}

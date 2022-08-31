@@ -19,6 +19,8 @@ export class ButtonElement extends AiElement{
             this.element.classList.add('icon');
         }
 
+        this.element.classList.add('after');
+
     }
 
 }

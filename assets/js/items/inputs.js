@@ -1,6 +1,11 @@
-import { Element } from "./elements.js";
+import { AiElement, Element } from "./elements.js";
 import { IconElement } from "./icons.js";
 
+export class LabelElement extends AiElement{
+    constructor(inputName){
+        super('label', {for: inputName || ''})
+    }
+}
 
 export class InputElement extends Element{
 
@@ -47,18 +52,6 @@ export class InputElement extends Element{
 
     input(){
         return this.inputElement.get();
-    }
-
-    clear(){
-        this.input().value = '';
-    }
-
-    value(value){
-        this.input().value = value.toString();
-    }
-
-    addValue(value){
-        this.input().value += value.toString();
     }
 
 }

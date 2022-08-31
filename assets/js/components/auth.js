@@ -47,8 +47,8 @@ export class LoginComponent extends AuthComponent{
         super('Connexion');
 
         this.fieldsGroup.build({
-            email: FieldSet.email,
-            password: FieldSet.password
+            email: FieldSet.required('email'),
+            password: FieldSet.required('password')
         });
     }
 
@@ -60,7 +60,7 @@ export class RegisterComponent extends AuthComponent{
         super('Créer un compte');
 
         this.fieldsGroup.build({
-            email: FieldSet.email,
+            email: FieldSet.required('email'),
             username: {
                 type: 'text',
                 icon: 'person',
@@ -68,8 +68,8 @@ export class RegisterComponent extends AuthComponent{
                 rule: Rule.username,
                 required: true
             },
-            password: FieldSet.password,
-            repeat: FieldSet.repeat
+            password: FieldSet.required('password'),
+            repeat: FieldSet.required('repeat')
         });
 
         this.matchPass();
@@ -104,8 +104,8 @@ export class ChangePassComponent extends AuthComponent{
         super('Changement')
 
         this.fieldsGroup.build({
-            password: FieldSet.password,
-            repeat: FieldSet.repeat
+            password: FieldSet.required('password'),
+            repeat: FieldSet.required('repeat')
         });
 
         this.matchPass();

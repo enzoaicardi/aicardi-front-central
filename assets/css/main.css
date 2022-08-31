@@ -8,6 +8,10 @@
 @import url('./items/buttons.css');
 @import url('./items/groups.css');
 @import url('./items/entities.css');
+@import url('./items/labels.css');
+@import url('./items/checks.css');
 
+@import url('./components/loader.css');
 @import url('./components/auth.css');
 @import url('./components/list.css');
+@import url('./components/data.css');

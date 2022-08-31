@@ -1,0 +1,76 @@
+[data-success]{
+    transition: 300ms ease;
+}
+[data-loading]{
+    cursor: not-allowed;
+    opacity: 0.5;
+    transition: 300ms ease;
+}
+
+[data-loading],
+[data-success]{
+    --load-color: var(--color-incontent);
+    --size: 6px;
+    --distance: 8px;
+}
+
+[data-loading].before::before,
+[data-loading] .before::before,
+[data-loading].after::after,
+[data-loading] .after::after{
+    
+    content: '';
+    width: var(--size);
+    height: var(--size);
+    margin: var(--distance);
+
+    background-color: transparent;
+    border-radius: 50%;
+    border: var(--border-none);
+
+    box-shadow: 
+        var(--distance) calc(-1 * var(--distance)) 0 0 var(--load-color),
+        var(--distance) var(--distance) 0 0 var(--load-color),
+        calc(-1 * var(--distance)) var(--distance) 0 0 var(--load-color),
+        calc(-1 * var(--distance)) calc(-1 * var(--distance)) 0 0 var(--load-color)
+    ;
+
+    animation: loader 800ms ease 0ms infinite normal forwards;
+
+}
+
+[data-success].before::before,
+[data-success] .before::before,
+[data-success].after::after,
+[data-success] .after::after{
+
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='white' %3E%3Cpath d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z'/%3E%3C/svg%3E");
+
+    width: calc(2 * var(--distance) + var(--size));
+    height: calc(2 * var(--distance) + var(--size));
+    margin: 0;
+
+    border: var(--border-incontent);
+    border-radius: 50%;
+
+    box-shadow: 
+        0 0 0 0 transparent,
+        0 0 0 0 transparent,
+        0 0 0 0 transparent,
+        0 0 0 0 transparent
+    ;
+
+    animation: none;
+    transition: 500ms cubic-bezier(.8,1.9,.2,.4);
+}
+
+@keyframes loader {
+    100%{
+        box-shadow: 
+            var(--distance) var(--distance) 0 0 var(--load-color),
+            calc(-1 * var(--distance)) var(--distance) 0 0 var(--load-color),
+            calc(-1 * var(--distance)) calc(-1 * var(--distance)) 0 0 var(--load-color),
+            var(--distance) calc(-1 * var(--distance)) 0 0 var(--load-color)
+        ;
+    }
+}

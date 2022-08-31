@@ -35,7 +35,7 @@ export class ListComponent extends AiElement{
                 this.itemsGroup, [
                     new EntityElement({firstname: 'jack', city: 'Tence', postcode: '43190'})
                 ],
-                new GroupElement('footer'), [this.confirmButton.addStatus('loading')]
+                new GroupElement('footer'), [this.confirmButton]
             ]
         ]);
 
