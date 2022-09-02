@@ -7,7 +7,7 @@ export class ButtonElement extends AiElement{
     constructor(name, options){
         options = options || {};
 
-        super('button', {tag: 'button'});
+        super('button', {tag: options.link ? 'a' : 'button'});
 
         this.textElement = new Element('p');
         this.textElement.asChild(this.element);
@@ -18,6 +18,9 @@ export class ButtonElement extends AiElement{
             this.icon.asChild(this.element);
             this.element.classList.add('icon');
         }
+
+        if(options.link) this.element.href = options.link;
+        if(options.size) this.element.classList.add(options.size);
 
         this.element.classList.add('after');
 

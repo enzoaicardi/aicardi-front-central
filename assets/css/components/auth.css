@@ -4,13 +4,14 @@
     width: 100%;
     height: auto;
 
-    max-width: 380px;
+    max-width: var(--col-max-width);
 
     border: var(--border-back);
     border-radius: var(--radius-medium);
     overflow: hidden;
 
     background-color: var(--color-window);
+    background-image: var(--gradient-window);
 
     display: flex;
     flex-direction: column;

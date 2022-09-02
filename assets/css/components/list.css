@@ -4,7 +4,7 @@
     width: 100%;
     height: auto;
 
-    max-width: 380px;
+    max-width: var(--col-max-width);
     max-height: 100vh;
 
     border: var(--border-back);
@@ -12,6 +12,7 @@
     overflow: hidden;
 
     background-color: var(--color-window);
+    background-image: var(--gradient-window);
 
     display: flex;
     flex-direction: column;
@@ -32,6 +33,7 @@
     .ai-list .content > * {
         flex: none;
         padding: 0 var(--gap-large);
+        max-width: unset;
     }
 
     .ai-list .content .items{
@@ -52,7 +54,7 @@
     }
 
     .dark-mode .ai-list .content .items{
-        background-color: var(--color-back);
+        background-color: var(--color-window);
     }
 
         .ai-list .content .items > *{

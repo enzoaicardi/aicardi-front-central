@@ -9,6 +9,8 @@ body{
     --bright: 65%;
 
     --color-window: hsl(var(--hue), 0%, 100%);
+    --color-window-gradient: hsl(var(--hue), 0%, 90%);
+
     --color-back: hsl(var(--hue), 20%, 85%);
     --color-content: hsl(var(--hue), 100%, 20%);
     --color-incontent: hsl(var(--hue), 0%, 100%);
@@ -22,7 +24,7 @@ body{
     --color-error:  #FF4C4D;
     --color-link: inherit;
 
-    --border-size: 2px;
+    --border-size: 1px;
     --border-none: var(--border-size) solid transparent;
     --border-window: var(--border-size) solid var(--color-window);
     --border-back: var(--border-size) solid var(--color-back);
@@ -34,6 +36,8 @@ body{
     --border-ok: var(--border-size) solid var(--color-ok);
     --border-warn: var(--border-size) solid var(--color-warn);
     --border-error: var(--border-size) solid var(--color-error);
+
+    --gradient-window: linear-gradient(-45deg, var(--color-window-gradient) 0%, var(--color-window) 100%);
 
     --font-default:  'Inter', Arial, Helvetica, sans-serif;
     --font-mono:     monospace;
@@ -52,7 +56,9 @@ body{
     --font-size-medium: 2rem;
     --font-size-large: 2.6rem;
     --font-size-mega: 3.6rem;
+
     --font-size-icon: 2.4rem;
+    --font-size-icon-large: 3.2rem;
 
     --radius-small: 5px;
     --radius-regular: 10px;
@@ -69,6 +75,7 @@ body{
     --input-height: 50px;
     --input-max-width: 340px;
     --data-max-width: 510px;
+    --col-max-width: 380px;
 
     font-family: var(--font-default);
     color: var(--color-content);
@@ -76,7 +83,9 @@ body{
 }
 
 body.dark-mode{
-    --color-window: hsl(var(--hue), 20%, 20%);
+    --color-window-gradient: hsl(var(--hue), 20%, 10%);
+    --color-window: hsl(var(--hue), 25%, 20%);
+    
     --color-back: hsl(var(--hue), 20%, 30%);
     --color-content: hsl(var(--hue), 0%, 100%);
     --color-incontent: hsl(var(--hue), 0%, 100%);
@@ -97,7 +106,8 @@ p{
 .material-icons-round,
 .material-icons-sharp,
 .material-icons-two-one{
-    line-height: normal;
+    line-height: normal !important;
+    font-weight: 400 !important;
 }
 
 h1, h2, h3, h4, h5{

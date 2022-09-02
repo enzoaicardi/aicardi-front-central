@@ -15,3 +15,13 @@
 @import url('./components/auth.css');
 @import url('./components/list.css');
 @import url('./components/data.css');
+
+@media screen and (max-width: 340px) {
+    body{
+        --gap-small: 5px;
+        --gap-regular: 10px;
+        --gap-medium: 15px;
+        --gap-large: 20px;
+        --gap-mega: 40px;
+    }
+}

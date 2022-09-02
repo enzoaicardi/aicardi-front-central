@@ -38,13 +38,13 @@ export class PopElement extends AiElement{
         this.code = code;
 
         this.iconElement = new IconElement(icon);
-        this.groupElement = new GroupElement('content');
+        this.contentElement = new GroupElement('content');
         this.codeElement = new Element('p', {class: 'code'}).content(code);
         this.messageElement = new Element('p', {class: 'message'}).content(popMessages[code]);
 
         this.describe([
             this.iconElement,
-            this.groupElement, [
+            this.contentElement, [
                 this.codeElement,
                 this.messageElement,
             ],

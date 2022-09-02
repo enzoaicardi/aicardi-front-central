@@ -1,6 +1,6 @@
 import { ButtonElement } from "../items/buttons.js";
 import { AiElement, GroupElement } from "../items/elements.js";
-import { EntityElement } from "../items/entities.js";
+import { BusinessEntity, EntityElement, TaskEntity } from "../items/entities.js";
 import { FieldElement } from "../items/fields.js";
 import { TitleElement } from "../items/titles.js";
 import { Media } from "../lib/urls.js";
@@ -33,7 +33,8 @@ export class ListComponent extends AiElement{
                 new GroupElement('new'), [this.addButton.addStatus('enabled')],
                 this.searchElement,
                 this.itemsGroup, [
-                    new EntityElement({firstname: 'jack', city: 'Tence', postcode: '43190'})
+                    new BusinessEntity({firstname: 'Enzo', lastname: 'Aicardi', city: 'Tence', company: "Aicardi.pro", postcode: '43190'}),
+                    new TaskEntity({title: 'Installer le systeme d\'exploitation windows 10', dynamic_price: 20, static_price: 15, icon: 'person'})
                 ],
                 new GroupElement('footer'), [this.confirmButton]
             ]

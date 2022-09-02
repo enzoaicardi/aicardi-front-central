@@ -170,7 +170,9 @@ export class GroupElement extends AiElement{
 
     constructor(name, attributes){
         super('group', attributes)
-        this.element.classList.add(name);
+        
+        if(Array.isArray(name)) name.forEach((className)=>{this.element.classList.add(className)});
+        else this.element.classList.add(name);
     }
 
 }

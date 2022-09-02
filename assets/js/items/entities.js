@@ -12,42 +12,85 @@ export class EntityElement extends AiElement{
      * @param {object} data 
      */
 
-    constructor(data){
+    constructor(label){
         super('entity');
 
-        this.labelElement = new EntityLabelElement(data);
-        this.openButton = new ButtonElement('Edit', {icon: 'edit'});
-        this.emailButton = new ButtonElement('Mail', {icon: 'email'});
-
-        let cityPostcode = Format.cityPostcode(data);
+        this.labelElement = label || null;
+        this.editGroup = new GroupElement('edit');
 
         this.describe([
-            this.labelElement,
-            new GroupElement('commands'), [
-                this.openButton.addStatus('enabled'),
-                this.emailButton
-            ],
-            new Element('div', {class: 'address'}).content(cityPostcode)
+            this.editGroup, [new IconElement('content_paste_go')],
+            this.labelElement
         ]);
 
-        // open and mail button should event.stoppropagation to prevent a manual deselection
+        // editGroup button should event.stoppropagation to prevent a manual deselection
 
     }
 }
 
-export class EntityLabelElement extends AiElement{
-
+export class BusinessEntity extends EntityElement{
     constructor(data){
-        super('entity-label');
+        super(new BusinessEntityLabel(data));
+    }
+}
 
-        let fullName = Format.fullName(data);
+export class TaskEntity extends EntityElement{
+    constructor(data){
+        super(new TaskEntityLabel(data));
+    }
+}
+
+export class EntityLabelElement extends Element{
+
+    constructor(className){
+        super('div', {class: ['label', className]});
+
+        this.title = new GroupElement('title');
+        this.subtitle = new GroupElement('subtitle');
 
         this.describe([
-            new IconElement(data.company ? 'domain' : 'person'),
-            new GroupElement('infos'), [
-                new Element('h3').content(data.company || fullName),
-                data.company ? new Element('p').content(fullName) : null
-            ]
+            this.title,
+            this.subtitle
+        ]);
+
+    }
+
+}
+
+export class BusinessEntityLabel extends EntityLabelElement{
+
+    constructor(data){
+        super('business');
+
+        let fullName = Format.fullName(data);
+        let cityPostcode = Format.cityPostcode(data);
+
+        this.title.describe([
+            new Element('h3', {class: 'name'}).content(data.company || fullName),
+            data.company ? new Element('p', {class: 'subname'}).content(fullName) : null
+        ]);
+
+        this.subtitle.describe([
+            new Element('div', {class: 'address'}).content(cityPostcode)
+        ]);
+
+    }
+
+}
+
+export class TaskEntityLabel extends EntityLabelElement{
+
+    constructor(data){
+        super('task');
+
+        this.title.add(new Element('h3', {class: 'name'}).content(data.title));
+
+        this.subtitle.describe([
+            new GroupElement('prices'), [
+                data.static_price ? new Element('div', {class: ['price', 'static']}).content(data.static_price + ' €') : null,
+                data.dynamic_price ? new Element('div', {class: ['price', 'dynamic'], dataset: {time: data.time || 'heure'}}).content(data.dynamic_price + ' €') : null
+            ],
+            data.icon ? new IconElement(data.icon) : null
         ]);
 
     }

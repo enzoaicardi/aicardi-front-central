@@ -25,11 +25,18 @@
 
     .ai-check .box::before{
         content: '';
-
-        width: 60%;
-        height: 60%;
-
+        
+        width: 55%;
+        height: 2px;
+        
         border-radius: 2px;
+        background-color: var(--color-back);
+
+        transition: 100ms ease;
+    }
+
+    .ai-check[data-value="1"] .box::before{
+        height: 55%;
         background-color: var(--color-main);
     }
 

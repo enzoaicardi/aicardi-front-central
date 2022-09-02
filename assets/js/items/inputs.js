@@ -2,8 +2,9 @@ import { AiElement, Element } from "./elements.js";
 import { IconElement } from "./icons.js";
 
 export class LabelElement extends AiElement{
-    constructor(inputName){
+    constructor(inputName, name){
         super('label', {for: inputName || ''})
+        this.content(name);
     }
 }
 
@@ -26,7 +27,8 @@ export class InputElement extends Element{
         // input element
         this.inputElement = new Element('input', {
             type: type || 'text',
-            name: name
+            name: name,
+            value: options.value || ''
         })
 
         this.inputElement.asChild(this.element);

@@ -4,46 +4,12 @@ import { InputElement, LabelElement } from "./inputs.js";
 import { PopsGroupElement } from "./pops.js";
 import { RequirementsGroupElement } from "./requirements.js";
 
-export class FieldSet{
-
-    static password = {
-        type: 'password',
-        icon: 'lock',
-        label: 'Mot de passe',
-        rule: Rule.password
-    }
-
-    static repeat = {
-        type: 'password',
-        icon: 'lock',
-        label: 'Répéter mot de passe',
-        rule: Rule.password
-    }
-
-    static email = {
-        type: 'email',
-        icon: 'email',
-        label: 'Adresse Email',
-        rule: Rule.email
-    }
-
-    static tel = {
-        type: 'tel',
-        icon: 'phone',
-        label: 'Téléphone',
-        rule: Rule.phone
-    }
-
-    static required(name){
-        return {...FieldSet[name], required: true}
-    }
-
-}
 
 export class FieldsGroupElement extends GroupElement{
 
-    constructor(){
-        super('fields');
+    constructor(subname){
+        let name = subname ? ['fields', subname] : 'fields';
+        super(name);
         this.fields = {};
     }
 
@@ -52,6 +18,7 @@ export class FieldsGroupElement extends GroupElement{
             this.fields[key] = new FieldElement(key, obj[key].type || null, obj[key]);
             this.add(this.fields[key]);
         }
+        return this;
     }
 
     field(name){
@@ -73,9 +40,7 @@ export class FieldElement extends AiElement{
         
         if(options.label) {
 
-            this.labelElement = new LabelElement(name)
-            this.labelElement.get().textContent = options.label;
-
+            this.labelElement = new LabelElement(name, options.label)
             let input = this.input();
 
             if(!input.getAttribute('placeholder')){
@@ -85,6 +50,7 @@ export class FieldElement extends AiElement{
         }
         
         if(options.required) this.addStatus('required');
+        if(options.value) this.addStatus('completed');
 
         this.describe([
             this.labelElement,
@@ -100,12 +66,8 @@ export class FieldElement extends AiElement{
         this.inputElement.listen('input', ()=>{
 
             let input = this.inputElement.input();
-
-            if(this.rule(input.value)) {
-                this.addStatus('completed');
-            } else {
-                this.removeStatus('completed');
-            }
+            if(this.rule(input.value)) this.addStatus('completed');
+            else this.removeStatus('completed');
 
         }, {passive:true});
 
@@ -143,6 +105,58 @@ export class FieldElement extends AiElement{
         return items.every((item)=>{
             return !item.isRequired() || item.isCompleted()
         });
+    }
+
+}
+
+export class FieldSet{
+
+    static password = {
+        type: 'password',
+        icon: 'lock',
+        label: 'Mot de passe',
+        rule: Rule.password
+    }
+
+    static repeat = {
+        type: 'password',
+        icon: 'lock',
+        label: 'Répéter mot de passe',
+        rule: Rule.password
+    }
+
+    static email = {
+        type: 'email',
+        icon: 'email',
+        label: 'Adresse Email',
+        rule: Rule.email
+    }
+
+    static tel = {
+        type: 'tel',
+        icon: 'phone',
+        label: 'Téléphone',
+        rule: Rule.tel
+    }
+
+    static siret = {
+        label: 'Siret',
+        placeholder: '784 671 695 00103',
+        rule: Rule.siret
+    }
+
+    static iban = {
+        label: 'IBAN',
+        placeholder: 'FR14 2001 0101 1505 0001 3M02 606',
+        rule: Rule.iban
+    }
+
+    static label(label, name){
+        return {...FieldSet[name], label: label}
+    }
+
+    static required(name){
+        return {...FieldSet[name], required: true}
     }
 
 }

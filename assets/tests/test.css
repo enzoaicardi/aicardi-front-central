@@ -5,6 +5,8 @@ body{
     min-height: 100vh;
     width: 100vw;
 
+    padding: 100px 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,5 +15,6 @@ body{
     gap: 50px;
 
     background-color: var(--color-window);
+    background-image: var(--gradient-window);
 
 }
