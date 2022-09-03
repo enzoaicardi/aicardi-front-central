@@ -1,4 +1,4 @@
-import { AiElement, Element } from "./elements.js";
+import { AiElement, Element } from "./element.js";
 import { IconElement } from "./icons.js";
 
 

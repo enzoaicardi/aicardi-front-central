@@ -14,10 +14,10 @@
     --distance: 8px;
 }
 
-[data-loading].before::before,
-[data-loading] .before::before,
-[data-loading].after::after,
-[data-loading] .after::after{
+[data-loading].load-before::before,
+[data-loading] .load-before::before,
+[data-loading].load-after::after,
+[data-loading] .load-after::after{
     
     content: '';
     width: var(--size);
@@ -39,15 +39,16 @@
 
 }
 
-[data-success].before::before,
-[data-success] .before::before,
-[data-success].after::after,
-[data-success] .after::after{
+[data-success].load-before::before,
+[data-success] .load-before::before,
+[data-success].load-after::after,
+[data-success] .load-after::after{
 
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='white' %3E%3Cpath d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z'/%3E%3C/svg%3E");
 
     width: calc(2 * var(--distance) + var(--size));
     height: calc(2 * var(--distance) + var(--size));
+    padding: 2px;
     margin: 0;
 
     border: var(--border-incontent);

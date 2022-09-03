@@ -36,7 +36,7 @@
         }
 
         .ai-entity .edit span,
-        .ai-entity[data-selected="readonly"] .edit span{
+        [data-readonly] .ai-entity[data-selected] .edit span{
             display: none;
         }
 

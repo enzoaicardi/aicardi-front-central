@@ -22,17 +22,29 @@
 
 }
 
-    .ai-auth .fields{
+    .ai-auth header{
+        width: 100%;
+        height: 100px;
+
+        background-color: var(--color-main);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: var(--gap-regular);
+    }
+
+    .ai-auth header svg{
+        height: 60px;
+    }
+
+    .ai-auth .valuables{
         gap: var(--gap-large);
         padding: 0 var(--gap-large);
     }
 
-    .ai-auth .ai-group.extra{
-        font-size: var(--font-size-small);
-        gap: var(--gap-small);
-    }
-
-    .ai-auth .footer{
+    .ai-auth footer{
         width: 100%;
         padding: 0 var(--gap-large);
     }

@@ -23,8 +23,8 @@ export class PopsGroupElement extends GroupElement{
         if(this.pops[code]) this.pops[code].get().remove()
     }
 
-    toggle(condition, code, icon){
-        if(condition) this.new(code, icon);
+    toggle(cond, code, icon){
+        if(cond) this.new(code, icon);
         else this.delete(code);
     }
 

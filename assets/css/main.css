@@ -2,8 +2,18 @@
 @import url('./presets/workspace.css');
 @import url('./presets/workclass.css');
 
-@import url('./items/headers.css');
-@import url('./items/titles.css');
+@import url('./elements/button.css');
+@import url('./elements/label.css');
+@import url('./elements/title.css');
+
+@import url('./components/field.css');
+@import url('./components/loader.css');
+
+@import url('./groups/group.css');
+
+@import url('./templates/auth/auth.css');
+
+/* @import url('./items/headers.css');
 @import url('./items/fields.css');
 @import url('./items/buttons.css');
 @import url('./items/groups.css');
@@ -11,10 +21,9 @@
 @import url('./items/labels.css');
 @import url('./items/checks.css');
 
-@import url('./components/loader.css');
 @import url('./components/auth.css');
 @import url('./components/list.css');
-@import url('./components/data.css');
+@import url('./components/data.css'); */
 
 @media screen and (max-width: 340px) {
     body{

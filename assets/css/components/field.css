@@ -27,6 +27,7 @@
         background-color: transparent;
 
         display: flex;
+        flex-direction: row;
         align-items: stretch;
         justify-content: space-between;
 
@@ -62,15 +63,17 @@
             color: var(--color-main);
         }
 
-    .ai-field .requirements{
+    .ai-field .fail,
+    .ai-field .require{
         font-size: var(--font-size-small);
         color: var(--color-subcontent);
     }
 
-    .ai-field .pops{
-        font-size: var(--font-size-small);
+    .ai-field .fail{
+        display: none;
         color: var(--color-error);
     }
-        .ai-field .ai-pop .code{
-            display: none;
-        }
+
+    .ai-field[data-failed] .fail{
+        display: block;
+    }

@@ -1,6 +1,7 @@
 import { AiElement, Element } from "./elements.js";
 import { IconElement } from "./icons.js";
 
+
 export class LabelElement extends AiElement{
     constructor(inputName, name){
         super('label', {for: inputName || ''})

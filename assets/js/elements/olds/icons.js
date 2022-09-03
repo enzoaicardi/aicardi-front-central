@@ -1,4 +1,4 @@
-import { Element } from "./elements.js";
+import { Element } from "./element.js";
 
 
 export class IconElement extends Element{

@@ -46,8 +46,8 @@ export class ListComponent extends AiElement{
         });
 
         this.itemsGroup.listen('click', ()=>{
-            const condition = this.itemsGroup.some((item)=>{return item.status('selected')})
-            this.confirmButton.toggleStatus(condition, 'enabled')
+            const cond = this.itemsGroup.some((item)=>{return item.status('selected')})
+            this.confirmButton.toggleStatus(cond, 'enabled')
         });
 
         this.asChild();

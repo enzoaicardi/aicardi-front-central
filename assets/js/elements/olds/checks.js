@@ -23,9 +23,9 @@ export class CheckBox extends AiElement{
         this.element.setAttribute('data-value', 0);
     }
 
-    toggle(condition){
-        if(typeof condition === 'undefined') condition = this.value()
-        if(condition) this.uncheck()
+    toggle(cond){
+        if(typeof cond === 'undefined') cond = this.value()
+        if(cond) this.uncheck()
         else this.check()
         return this.value()
     }

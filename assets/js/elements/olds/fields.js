@@ -94,10 +94,10 @@ export class FieldElement extends AiElement{
         items[0].watch(items, 'input', compare);
 
         function compare(){
-            const condition = items.some((item) => { return item.value() !== items[0].value(); });
+            const cond = items.some((item) => { return item.value() !== items[0].value(); });
 
-            items.forEach(item => { item.toggleStatus(condition, 'failed'); }); 
-            items[items.length-1].pops.toggle(condition, code);
+            items.forEach(item => { item.toggleStatus(cond, 'failed'); }); 
+            items[items.length-1].pops.toggle(cond, code);
         }
     }
 
