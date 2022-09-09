@@ -28,7 +28,7 @@
 
         display: flex;
         flex-direction: row;
-        align-items: stretch;
+        align-items: center;
         justify-content: space-between;
 
         gap: var(--gap-small);
@@ -43,6 +43,10 @@
         color: var(--color-incontent);
         background-color: var(--color-back);
 
+    }
+
+    .ai-field[data-success] .input{
+        border: var(--border-ok);
     }
 
     .ai-field[data-failed] .input{
@@ -61,6 +65,11 @@
             flex: none;
             align-self: center;
             color: var(--color-main);
+        }
+
+        .ai-field[data-loading] .input span,
+        .ai-field[data-success] .input span{
+            display: none;
         }
 
     .ai-field .fail,

@@ -39,7 +39,7 @@
         height: 60px;
     }
 
-    .ai-auth .valuables{
+    .ai-auth .form{
         gap: var(--gap-large);
         padding: 0 var(--gap-large);
     }

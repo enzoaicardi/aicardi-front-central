@@ -91,6 +91,18 @@ export class Element{
         return this.childs.every(fn)
     }
 
+    instancesOf(instance){
+        let instances = []
+        function explore(elems){
+            elems.forEach(elem => {
+                if(elem instanceof instance) instances.push(elem)
+                else if(elem.childs.length) explore(elem.childs)
+            })
+        }
+        explore(this.childs)
+        return instances
+    }
+
     // element status
 
     validStatus(name){

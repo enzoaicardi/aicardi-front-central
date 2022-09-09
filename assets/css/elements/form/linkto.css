@@ -1,0 +1,17 @@
+
+.ai-link-to{
+    flex: none;
+    cursor: pointer;
+    user-select: none;
+
+    width: var(--input-height);
+    height: var(--input-height);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--color-main);
+    border-radius: var(--radius-regular);
+    color: var(--color-incontent);
+}

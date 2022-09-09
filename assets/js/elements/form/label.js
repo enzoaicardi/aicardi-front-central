@@ -1,4 +1,4 @@
-import { ElementAi } from "./elementai.js"
+import { ElementAi } from "../elementai.js"
 
 export class Label extends ElementAi{
 

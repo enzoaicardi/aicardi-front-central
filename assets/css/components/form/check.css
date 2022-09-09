@@ -7,6 +7,8 @@
     display: flex;
     align-items: center;
     gap: var(--gap-medium);
+
+    color: var(--color-subcontent);
 }
 
     .ai-check .box{
@@ -35,16 +37,16 @@
         transition: 100ms ease;
     }
 
+.ai-check[data-value="1"]{
+    color: var(--color-content);
+}
+
     .ai-check[data-value="1"] .box::before{
         height: 55%;
         background-color: var(--color-main);
     }
 
-.ai-check.full{
-    padding: var(--gap-regular) 0;
-}
-
-.ai-check.full::after{
+.ai-check::after{
     content: '';
     flex: 1 1 auto;
     border-bottom: var(--border-back);

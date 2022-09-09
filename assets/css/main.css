@@ -2,24 +2,27 @@
 @import url('./presets/workspace.css');
 @import url('./presets/workclass.css');
 
-@import url('./elements/button.css');
-@import url('./elements/label.css');
+@import url('./elements/form/button.css');
+@import url('./elements/form/label.css');
+@import url('./elements/form/linkto.css');
 @import url('./elements/title.css');
 
-@import url('./components/field.css');
+@import url('./components/form/field.css');
+@import url('./components/form/check.css');
 @import url('./components/loader.css');
 
 @import url('./groups/group.css');
+@import url('./groups/form.css');
 
 @import url('./templates/auth/auth.css');
+@import url('./templates/item/data.css');
 
-/* @import url('./items/headers.css');
+/*
 @import url('./items/fields.css');
 @import url('./items/buttons.css');
 @import url('./items/groups.css');
 @import url('./items/entities.css');
 @import url('./items/labels.css');
-@import url('./items/checks.css');
 
 @import url('./components/auth.css');
 @import url('./components/list.css');

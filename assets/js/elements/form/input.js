@@ -1,4 +1,4 @@
-import { Rule } from "../lib/format/rules.js";
+import { Rule } from "../../lib/format/rules.js";
 import { Valuable } from "./valuable.js";
 
 export class Input extends Valuable{
@@ -55,6 +55,11 @@ export class Input extends Valuable{
         type: 'tel',
         icon: 'phone',
         rule: Rule.tel
+    }
+
+    static name = {
+        label: "Nom",
+        rule: Rule.name
     }
 
     static username = {

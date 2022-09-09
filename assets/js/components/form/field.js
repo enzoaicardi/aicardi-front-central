@@ -1,10 +1,10 @@
-import { Group } from "../groups/group.js";
-import { ElementAi } from "../elements/elementai.js";
-import { Icon } from "../elements/icon.js";
-import { Input } from "../elements/input.js";
-import { Label } from "../elements/label.js";
-import { Rule } from "../lib/format/rules.js";
-import { Element } from "../elements/element.js";
+import { Group } from "../../groups/group.js";
+import { ElementAi } from "../../elements/elementai.js";
+import { Icon } from "../../elements/icon.js";
+import { Input } from "../../elements/form/input.js";
+import { Label } from "../../elements/form/label.js";
+import { Rule } from "../../lib/format/rules.js";
+import { Element } from "../../elements/element.js";
 
 export class Field extends ElementAi{
 
@@ -23,7 +23,7 @@ export class Field extends ElementAi{
 
         this.describe([
             this.label,
-            new Group('input'), [
+            new Group(['input', 'load-after']), [
                 this.input,
                 this.icon
             ],

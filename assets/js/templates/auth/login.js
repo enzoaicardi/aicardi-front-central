@@ -1,5 +1,5 @@
-import { Field } from "../../components/field.js";
-import { Input } from "../../elements/input.js";
+import { Field } from "../../components/form/field.js";
+import { Input } from "../../elements/form/input.js";
 import { AuthForm } from "./auth.js";
 
 export class LoginForm extends AuthForm{
@@ -11,6 +11,6 @@ export class LoginForm extends AuthForm{
             password: new Field('password', {...Input.password, fail: 'Mot de passe erroné'}).status('required')
         }
 
-        this.valuables.describe(Object.values(this.fields))
+        this.form.describe(Object.values(this.fields))
     }
 }

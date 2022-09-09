@@ -1,4 +1,4 @@
-import { Element } from "./element.js";
+import { Element } from "../element.js";
 
 export class Valuable extends Element{
 
@@ -10,13 +10,19 @@ export class Valuable extends Element{
     }
 
     value(value){
-        if(!typeof value === 'undefined') this.input ? this.element.value = value : this.element.setAttribute('data-value', value)
+        if(typeof value !== 'undefined') this.input ? this.element.value = value : this.element.setAttribute('data-value', value)
         else return this.input ? this.element.value : this.element.getAttribute('data-value')
         return this
     }
 
     addValue(value){
         this.value(this.value() + value || '')
+        return this
+    }
+
+    name(name){
+        if(name) this.input ? this.element.name = name : this.element.setAttribute('data-name', name)
+        else return this.input ? this.element.name : this.element.getAttribute('data-name')
         return this
     }
 

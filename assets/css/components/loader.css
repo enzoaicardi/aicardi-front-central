@@ -3,8 +3,13 @@
 }
 [data-loading]{
     cursor: not-allowed;
+    user-select: none;
     opacity: 0.5;
     transition: 300ms ease;
+}
+
+[data-loading] input{
+    pointer-events: none;
 }
 
 [data-loading],
@@ -20,6 +25,7 @@
 [data-loading] .load-after::after{
     
     content: '';
+    flex: none;
     width: var(--size);
     height: var(--size);
     margin: var(--distance);
@@ -46,6 +52,7 @@
 
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='white' %3E%3Cpath d='M18.9 35.7 7.7 24.5l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Z'/%3E%3C/svg%3E");
 
+    flex: none;
     width: calc(2 * var(--distance) + var(--size));
     height: calc(2 * var(--distance) + var(--size));
     padding: 2px;

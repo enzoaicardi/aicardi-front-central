@@ -1,6 +1,6 @@
-import { Element } from "./element.js";
-import { ElementAi } from "./elementai.js";
-import { Icon } from "./icon.js";
+import { Element } from "../element.js";
+import { ElementAi } from "../elementai.js";
+import { Icon } from "../icon.js";
 
 export class Button extends ElementAi{
 

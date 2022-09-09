@@ -1,0 +1,37 @@
+.form{
+    gap: var(--gap-large);
+}
+
+.form > * {
+    flex: none;
+}
+
+.form:empty{
+    display: flex;
+}
+
+    .form .line{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: var(--gap-large);
+    }
+
+    .form .col{
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-medium);
+    }
+
+    .form .sub{
+        display: none;
+        gap: inherit;
+    }
+
+    .form .sub[data-enabled]{
+        display: flex;
+    }
+
+    .form .ai-check{
+        padding: var(--gap-regular) 0;
+    }
