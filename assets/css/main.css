@@ -9,6 +9,8 @@
 
 @import url('./components/form/field.css');
 @import url('./components/form/check.css');
+@import url('./components/item.css');
+@import url('./components/pop.css');
 @import url('./components/loader.css');
 
 @import url('./groups/group.css');

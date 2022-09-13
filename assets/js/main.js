@@ -5,7 +5,7 @@ import { ForgotForm } from "./templates/auth/forgot.js";
 import { LoginForm } from "./templates/auth/login.js";
 import { RegisterForm } from "./templates/auth/register.js";
 import { ItemData } from "./templates/item/data.js";
-import { EntityData } from "./templates/item/entitydata.js";
+import { EntityData } from "./templates/data/entitydata.js";
 
-new EntityData()
-new LoginForm()
+let data = new EntityData()
+data.data({firstname: 'Enzo', country: 'France'})

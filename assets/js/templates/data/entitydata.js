@@ -4,7 +4,7 @@ import { Input } from "../../elements/form/input.js";
 import { LinkTo } from "../../elements/form/linkto.js";
 import { Group } from "../../groups/group.js";
 import { Rule } from "../../lib/format/rules.js";
-import { ItemData } from "./data.js";
+import { ItemData } from "../item/data.js";
 
 export class EntityData extends ItemData{
 
@@ -12,6 +12,7 @@ export class EntityData extends ItemData{
         super(data)
 
         this.company = new Group('sub');
+        this.checkCompany = new Check('is_company', {label: 'Entreprise'})
 
         this.form.describe([
 
@@ -28,7 +29,7 @@ export class EntityData extends ItemData{
                 new LinkTo('mailto:email.com', 'phone_in_talk')
             ],
 
-            new Check('is_company', {label: 'Entreprise'}).attach(this.company),
+            this.checkCompany,
 
             this.company, [
                 new Field('company', {label: 'Denomination', rule: Rule.username}),
@@ -47,6 +48,9 @@ export class EntityData extends ItemData{
             new Field('address_2', {label: 'Complément d\'adresse'})
 
         ])
+
+        this.form.status('readonly')
+        this.checkCompany.attach(this.company)
     }
 
 }

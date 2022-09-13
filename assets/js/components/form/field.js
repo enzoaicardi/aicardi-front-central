@@ -37,7 +37,11 @@ export class Field extends ElementAi{
 
     }
 
-    value(value) {
+    name(name){
+        return this.input.name(name)
+    }
+
+    value(value){
         return this.input.value(value)
     }
 

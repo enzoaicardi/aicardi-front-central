@@ -28,9 +28,20 @@ export class Valuable extends Element{
 
     // static method
 
-    static same(array){
+    static areSame(array){
         const cond = array.some(valuable => array[0].value() !== valuable.value())
         array.forEach(valuable => valuable.toggle(cond, 'failed'));
+    }
+
+    static areValid(array){
+        let cond = true;
+        array.some(valuable => {
+            if(!valuable.isValid()){
+                cond = false
+                valuable.toggle(!valuable.is('required') && !valuable.isValid(), 'careful')
+            }
+        })
+        return cond
     }
 
 }

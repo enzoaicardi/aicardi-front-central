@@ -14,8 +14,10 @@ export class Element{
         this.element = createElement(tag, attributes)
         this.childs = []
 
-        this.acceptedStatus = ['enabled', 'completed', 'selected', 'required', 'careful', 'loading', 'failed', 'success', 'readonly']
+        this.acceptedStatus = ['enabled', 'completed', 'selected', 'required', 'failed', 'careful', 'success', 'readonly', 'inactive', 'loading']
         this.statusList = {}
+
+        this.pop = false
 
     }
 
@@ -91,16 +93,21 @@ export class Element{
         return this.childs.every(fn)
     }
 
-    instancesOf(instance){
-        let instances = []
+    instancesOf(instances, deep){
+
+        let results = []
+        if(!Array.isArray(instances)) instances = [instances]
+
         function explore(elems){
             elems.forEach(elem => {
-                if(elem instanceof instance) instances.push(elem)
-                else if(elem.childs.length) explore(elem.childs)
+                const cond = instances.some(instance => {return elem instanceof instance})
+                if(cond) results.push(elem)
+                if(((!cond && !deep) || deep) && elem.childs.length) explore(elem.childs)
             })
         }
+
         explore(this.childs)
-        return instances
+        return results
     }
 
     // element status
@@ -109,7 +116,7 @@ export class Element{
         return this.acceptedStatus.indexOf(name) + 1
     }
 
-    hasStatus(name){
+    is(name){
         return this.statusList[name] || false
     }
 
@@ -130,7 +137,9 @@ export class Element{
     // events
 
     listen(type, fn, options){
-        this.element.addEventListener(type, fn, options || {passive:true})
+        const handler = options && options.quiet ? (event)=>{event.stopPropagation(); fn(event)} : fn
+        this.element.addEventListener(type, handler, options || {passive:true})
+        return this
     }
 
     watch(elems, type, fn, options){
@@ -138,20 +147,29 @@ export class Element{
         instances.forEach(elem => {
             elem.listen(type, event => fn(elem, event), options)
         })
+        return this
     }
 
     // element conds
 
     isRequired(){
-        return this.hasStatus('required')
+        return this.is('required')
     }
 
     isCompleted(){
-        return this.hasStatus('completed')
+        return this.is('completed') && !this.is('failed')
+    }
+
+    isCareful(){
+        return this.is('careful')
+    }
+
+    isSubmitable(){
+        return this.is('enabled') && !this.is('success') && !this.is('loading') && !this.is('inactive')
     }
 
     isValid(){
-        return !this.isRequired() || (this.isCompleted() && !this.hasStatus('failed'))
+        return this.is('inactive') || !this.isRequired() && this.isCareful() || this.isCompleted()
     }
 
 }

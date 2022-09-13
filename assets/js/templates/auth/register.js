@@ -17,6 +17,6 @@ export class RegisterForm extends AuthForm{
         this.form.describe(Object.values(this.fields))
 
         let fields = [this.fields.password, this.fields.repeat];
-        this.watch(fields, 'input', () => Valuable.same(fields))
+        this.watch(fields, 'input', () => Valuable.areSame(fields))
     }
 }

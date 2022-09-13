@@ -5,6 +5,7 @@ import { Svg } from "../../elements/svg.js";
 import { Title } from "../../elements/title.js";
 import { Form } from "../../groups/form.js";
 import { Media } from "../../lib/format/medias.js";
+import { Valuable } from "../../elements/form/valuable.js";
 
 export class AuthForm extends ElementAi{
 
@@ -22,8 +23,8 @@ export class AuthForm extends ElementAi{
         ])
 
         this.listen('input', () => {
-            const cond = this.form.fields().some(elem => {return !elem.isValid()})
-            this.confirm.toggle(!cond, 'enabled')
+            const cond = Valuable.areValid(this.form.fields())
+            this.confirm.toggle(cond, 'enabled')
         })
 
         this.childOf()

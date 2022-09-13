@@ -1,27 +1,76 @@
 
 
-.ai-entity{
+.ai-item{
     user-select: none;
     cursor: pointer;
 
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
     width: 100%;
 
-    gap: var(--gap-regular);
-    padding: var(--gap-regular);
+    padding: var(--gap-medium);
+    gap: var(--gap-medium);
 
+    background-color: var(--color-window);
     background-image: var(--gradient-window);
     border-radius: var(--radius-regular);
-
     border: var(--border-back);
+
+    --item-main-color: var(--color-content);
+    --item-icon-color: var(--color-main);
 }
 
-.ai-entity[data-selected]{
+.ai-item header,
+.ai-item footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-medium);
+}
+
+.ai-item header:empty,
+.ai-item footer:empty{
+    display: none;
+}
+
+.ai-item .main{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: var(--gap-medium);
+}
+
+    .ai-item .main > *{
+        flex: none;
+    }
+
+    .ai-item .main span{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        font-size: var(--font-size-icon-large);
+        color: var(--item-icon-color);
+    }
+
+    .ai-item .spliter{
+        height: auto;
+        width: calc(var(--border-size) * 2);
+        border-radius: var(--border-size);
+        background-color: var(--item-main-color);
+    }
+
+    .ai-item .main .content{
+        flex: 1 1 auto;
+        line-height: var(--line-height);
+    }
+
+/* .ai-item[data-selected]{
     border: var(--border-main);
 }
 
-    .ai-entity .edit{
+    .ai-item .edit{
         flex: none;
         flex-direction: row;
         align-items: center;
@@ -30,17 +79,17 @@
         width: auto;
     }
 
-        .ai-entity[data-selected] .edit span{
+        .ai-item[data-selected] .edit span{
             display: block;
             font-size: var(--font-size-icon-large);
         }
 
-        .ai-entity .edit span,
-        [data-readonly] .ai-entity[data-selected] .edit span{
+        .ai-item .edit span,
+        [data-readonly] .ai-item[data-selected] .edit span{
             display: none;
         }
 
-        .ai-entity .edit::after{
+        .ai-item .edit::after{
             content: '';
             height: 100%;
             width: 5px;
@@ -48,7 +97,7 @@
             background-color: var(--color-main);
         }
 
-    .ai-entity .label{
+    .ai-item .label{
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
@@ -58,85 +107,81 @@
 
     }
 
-        .ai-entity .label .title,
-        .ai-entity .label .subtitle{
+        .ai-item .label .title,
+        .ai-item .label .subtitle{
             flex-direction: row;
             align-items: flex-end;
             gap: var(--gap-regular);
             font-weight: var(--font-semibold);
         }
 
-        .ai-entity .label .title > *,
-        .ai-entity .label .subtitle > *{
+        .ai-item .label .title > *,
+        .ai-item .label .subtitle > *{
             flex: none;
         }
 
-            /* title */
-
-            .ai-entity .label .name{
+            .ai-item .label .name{
                 flex: 1 1 auto;
                 font-size: var(--font-size-regular);
                 line-height: var(--line-height);
             }
 
-            .ai-entity .business .name{
+            .ai-item .business .name{
                 flex: none;
                 color: var(--color-content);
                 font-size: var(--font-size-medium);
             }
 
-            .ai-entity .label .subname{
+            .ai-item .label .subname{
                 color: var(--color-main);
                 font-style: italic;
             }
 
-            .ai-entity .business .name,
-            .ai-entity .business .subname{
+            .ai-item .business .name,
+            .ai-item .business .subname{
                 text-transform: capitalize;
             }
 
-            /* subtitle */
-
-        .ai-entity .label .subtitle{
+        .ai-item .label .subtitle{
             font-size: var(--font-size-small);
             justify-content: space-between;
         }
 
-            .ai-entity .label .address{
+            .ai-item .label .address{
                 color: var(--color-subcontent);
                 font-weight: var(--font-medium);
             }
 
-            .ai-entity .label .address:empty{
+            .ai-item .label .address:empty{
                 display: none;
             }
 
-            .ai-entity .label span{
+            .ai-item .label span{
                 font-size: var(--font-size-medium);
                 color: var(--color-subcontent);
             }
 
-            .ai-entity .label .prices{
+            .ai-item .label .prices{
                 width: max-content;
                 flex-direction: row;
                 font-weight: var(--font-medium);
                 gap: var(--gap-regular);
             }
 
-                .ai-entity .price{
+                .ai-item .price{
                     display: flex;
                     align-items: flex-end;
                     gap: var(--gap-small);
-                    color: var(--color-ok);
+                    color: var(--color-success);
                 }
 
-                .ai-entity .label .static::before{
+                .ai-item .label .static::before{
                     content: 'Unique.';
                     color: var(--color-subcontent);
                 }
 
-                .ai-entity .label .dynamic::before{
+                .ai-item .label .dynamic::before{
                     content: attr(data-time) '.';
                     text-transform: capitalize;
                     color: var(--color-subcontent);
-                }
+                } */

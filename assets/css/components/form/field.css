@@ -46,7 +46,7 @@
     }
 
     .ai-field[data-success] .input{
-        border: var(--border-ok);
+        border: var(--border-success);
     }
 
     .ai-field[data-failed] .input{
@@ -55,6 +55,10 @@
 
     .ai-field[data-careful] .input{
         border: var(--border-warn);
+    }
+
+    .ai-field[data-careful][data-completed] .input{
+        border: var(--border-success);
     }
 
         .ai-field .input input{
